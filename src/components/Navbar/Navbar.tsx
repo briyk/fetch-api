@@ -13,7 +13,7 @@ const Navbar = () => {
   const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <Container className={styles.navbar}>
+    <Container className={styles.navbar} id="navbar">
       <Link href="/" style={{padding:"10px"}}>LOGO</Link>
       <Link href="/cart">
         <span>
