@@ -13,14 +13,16 @@ const Navbar = () => {
   const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <Container className={styles.navbar} id="navbar">
-      <Link href="/" style={{padding:"10px"}}>LOGO</Link>
+    <Container >
+        <div className={styles.navbar} id="navbar">
+        <Link href="/" style={{padding:"10px"}}>LOGO</Link>
       <Link href="/cart">
         <span>
           <ShoppingCartIcon />
           {totalQuantity > 0 && <div className={styles.amount}>{totalQuantity}</div>}
         </span>
       </Link>
+        </div>
     </Container>
   );
 };
