@@ -1,31 +1,32 @@
-import { createContext, useReducer, ReactNode, useContext } from "react";
+import { createContext, useReducer, ReactNode, useContext, Dispatch } from "react";
+// import { useLocalStorage } from "@/utils/useLocalStorage";
 
 interface Item {
   id: number;
   quantity: number;
   price: number;
-  image:string ;
-  name:string;
-
+  image: string;
+  name: string;
 }
 
-interface CartState extends Array<Item> {}
+type CartState = Item[];
 
 interface CartContextProps {
   state: CartState;
-  dispatch: React.Dispatch<CartAction>;
+  dispatch: Dispatch<CartAction>;
   total: number;
 }
 
-interface CartAction {
-  type: string;
-  payload: Item;
-}
+type CartAction =
+  | { type: "ADD"; payload: Item }
+  | { type: "INCREASE"; payload: Item }
+  | { type: "DECREASE"; payload: Item }
+  | { type: "REMOVE"; payload: Item };
 
 export const CartContext = createContext<CartContextProps>({
   state: [],
   dispatch: () => null,
-  total: 0
+  total: 0,
 });
 
 const reducer = (state: CartState, action: CartAction) => {
@@ -34,11 +35,9 @@ const reducer = (state: CartState, action: CartAction) => {
       const item = action.payload;
       const existingItem = state.find((i) => i.id === item.id);
       if (existingItem) {
-        // If item already exists in cart, update its quantity
         existingItem.quantity += 1;
         return [...state];
       } else {
-        // Otherwise, add the new item to the cart
         return [...state, { ...item, quantity: 1 }];
       }
     }
@@ -63,9 +62,7 @@ const reducer = (state: CartState, action: CartAction) => {
       return tempstate2;
     }
     case "REMOVE": {
-      const tempstate3 = state.filter(
-        (item) => item.id !== action.payload.id
-      );
+      const tempstate3 = state.filter((item) => item.id !== action.payload.id);
       return tempstate3;
     }
     default:
@@ -77,8 +74,8 @@ interface Props {
   children: ReactNode;
 }
 
-export function useCart(){
-  return useContext(CartContext)
+export function useCart() {
+  return useContext(CartContext);
 }
 
 export const CartProvider = ({ children }: Props) => {
@@ -88,9 +85,7 @@ export const CartProvider = ({ children }: Props) => {
     return acc + item.price * item.quantity;
   }, 0);
 
-  const value = { state, dispatch, total };
-  
-  return (
-    <CartContext.Provider value={value}>{children}</CartContext.Provider>
-  );
+  const value: CartContextProps = { state, dispatch, total };
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };

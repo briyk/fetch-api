@@ -8,13 +8,15 @@ import { useCart } from '@/context/CartContext';
 
 interface Product {
   id: number;
-  title: string;
-  category: string ;
+  name: string;
+  category: string;
   price: number;
   image: string;
- 
+  title: string;
+  quantity: number; // make quantity required with default value of 1
 }
- 
+
+
 interface Props {
   products: Product[];
 }
@@ -52,3 +54,10 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     },
   };
 };
+
+/*
+Type 'Product' is not assignable to type 'Item'.
+  Types of property 'quantity' are incompatible.
+    Type 'number | undefined' is not assignable to type 'number'.
+      Type 'undefined' is not assignable to type 'number'.
+*/
