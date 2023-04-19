@@ -1,0 +1,33 @@
+.cartHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 16px;
+
+  .MuiTypography-subtitle1 {
+    font-weight: bold;
+  }
+}
+
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 16px;
+
+  .MuiTypography-subtitle1 {
+    flex: 1;
+  }
+
+  .itemImage {
+    margin-right: 8px;
+  }
+}
+.quantity{
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+}

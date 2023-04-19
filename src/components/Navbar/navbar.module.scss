@@ -1,0 +1,34 @@
+
+.navbar{
+     display: flex;
+     height: 70px;
+     justify-content: space-between;
+     align-items: center;
+
+     a{
+          font-weight: 700;
+          font-size: 18px;
+          color: #252B42;
+     }
+     span{
+          position: relative;
+     }
+     .amount{
+          position: absolute;
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          background: #252B42;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          right: -10px;
+          top: -25px;
+     }
+     svg{
+          color: #23A6F0;
+          font-size: 35px;
+          cursor: pointer;
+     }
+}
